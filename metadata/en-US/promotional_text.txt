@@ -1,0 +1,1 @@
+Now fully compatible with iOS 27. A built-in browser lets you look things up and learn to code online — plus a smoother, faster experience overall.

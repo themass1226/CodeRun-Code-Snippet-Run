@@ -1,0 +1,28 @@
+CodeRun is a mobile tool for running and editing code snippets. It supports over 600 programming languages—from mainstream ones like Python, Java, Swift, C#, JavaScript, and C++, to esoteric favorites like Brainfuck, INTERCAL, and Malbolge. No need to set up a development environment on your computer; just open it and start writing and running code.
+
+Key Features:
+
+Vast language support: over 600 languages, from mainstream to obscure.
+Write and run instantly: run code with one tap and get the output returned line by line in real time, with support for input arguments.
+Professional editor: Monaco-powered, with syntax highlighting, code hints, and formatting.
+Built-in examples: every language ships with a Hello World example you can try right away.
+Built-in browser: open any webpage, including AI sites, right inside the app; save chat or code content to the file manager with one tap.
+Built-in file manager: manage your code files, transfer them between your phone and computer over WiFi, with rename, delete, and share.
+
+Who It's For:
+
+Students: pick up a new language right on your phone, with no heavy environment setup.
+Developers: quickly test an algorithm or idea and iterate on the go.
+Geeks and code players: challenge yourself with oddball languages like Brainfuck and Malbolge.
+
+Unlimited Access Subscription:
+- With this subscription, you can enjoy unlimited access to all features within the app.
+- Subscriptions are charged weekly, monthly, or yearly, depending on the selected subscription plan.
+- Payment will be charged to your iTunes account upon confirmation of purchase.
+- You can turn off auto-renewal at least 24 hours before the current subscription period ends; otherwise, the subscription will automatically renew.
+- The renewal fee will be charged to your account within 24 hours before the end of the current subscription period, depending on the chosen plan.
+- Users can manage their subscriptions and can turn off auto-renewal in their account settings after purchase.
+- Any unused portion of a free subscription trial period will be forfeited upon purchase.
+
+Privacy Policy: https://www.dazhuogroup.com/coderun/privacy_statement_en.php
+Terms of Use: https://www.dazhuogroup.com/coderun/terms_of_use_en.php

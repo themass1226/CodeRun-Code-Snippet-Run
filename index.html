@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeRun - 代码片段运行工具 | 在手机上运行 600+ 种编程语言</title>
+<meta name="description" content="CodeRun 是一款在手机上运行和编辑代码片段的工具，内置 600 多种编程语言。Run and edit code snippets in 600+ programming languages, right on your phone.">
+<meta property="og:title" content="CodeRun - Code Snippet Run">
+<meta property="og:description" content="Run & edit code in 600+ languages on your phone. 手机上即可运行与编辑 600+ 种语言的代码。">
+<meta property="og:image" content="assets/screenshots/01_en.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root{
+    --bg:#080b12;
+    --bg-soft:#0e1420;
+    --panel:#121a29;
+    --panel-2:#16203210;
+    --border:#22304a;
+    --text:#e6edf7;
+    --muted:#93a4bf;
+    --accent:#34d399;
+    --accent-2:#38bdf8;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  code,pre,.mono{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace}
+
+  /* ===== header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(8,11,18,.78);
+    border-bottom:1px solid rgba(34,48,74,.6);
+  }
+  .nav{display:flex;align-items:center;gap:24px;height:62px}
+  .logo{font-weight:800;font-size:1.15rem;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+  .logo .bolt{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:8px;font-size:.9rem;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#04121b;
+  }
+  .nav nav{display:flex;gap:22px;margin-left:auto;font-size:.92rem;color:var(--muted)}
+  .nav nav a:hover{color:var(--text)}
+  .tools{display:flex;align-items:center;gap:10px}
+  .lang-btn{
+    background:var(--panel);border:1px solid var(--border);color:var(--text);
+    padding:7px 14px;border-radius:999px;font-size:.85rem;cursor:pointer;
+    transition:.2s;
+  }
+  .lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-sm{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#04121b;font-weight:700;padding:8px 16px;border-radius:999px;
+    font-size:.85rem;transition:.2s;
+  }
+  .btn-sm:hover{filter:brightness(1.1);transform:translateY(-1px)}
+
+  /* ===== hero ===== */
+  .hero{position:relative;padding:84px 0 60px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:-40% -20% auto;height:120%;
+    background:
+      radial-gradient(560px 320px at 22% 18%,rgba(52,211,153,.16),transparent 65%),
+      radial-gradient(560px 340px at 78% 0%,rgba(56,189,248,.14),transparent 65%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid rgba(52,211,153,.4);background:rgba(52,211,153,.08);
+    color:var(--accent);font-size:.82rem;padding:6px 14px;border-radius:999px;margin-bottom:20px;
+  }
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.2;font-weight:800;letter-spacing:-.5px}
+  h1 .brand{
+    background:linear-gradient(100deg,var(--accent) 10%,var(--accent-2) 90%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  h1 .full{display:block;font-size:.52em;font-weight:600;color:var(--muted);margin-top:8px;letter-spacing:0}
+  .sub{font-size:1.12rem;color:var(--muted);margin-top:16px}
+  .promo{
+    margin-top:14px;font-size:.95rem;color:#bfe9d8;
+    border-left:3px solid var(--accent);padding-left:12px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .tags span{
+    font-size:.78rem;padding:4px 11px;border-radius:8px;
+    background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.22);color:#a8dcf7;
+  }
+  .tags span.more{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.35);color:var(--accent);font-weight:700}
+  .cta{display:flex;align-items:center;gap:18px;margin-top:30px;flex-wrap:wrap}
+  .appstore{
+    display:inline-flex;align-items:center;gap:12px;
+    background:#000;border:1px solid #3a3f4a;border-radius:14px;
+    padding:11px 22px;transition:.2s;
+    box-shadow:0 8px 26px rgba(0,0,0,.45);
+  }
+  .appstore:hover{transform:translateY(-2px);border-color:#fff}
+  .appstore svg{width:26px;height:26px;fill:#fff}
+  .appstore small{display:block;font-size:.66rem;color:#c9ccd3;line-height:1.1;letter-spacing:.5px}
+  .appstore strong{display:block;font-size:1.18rem;line-height:1.2;font-weight:600;color:#fff}
+  .free-note{font-size:.82rem;color:var(--muted)}
+
+  /* terminal mock */
+  .terminal{
+    background:linear-gradient(180deg,#0d1421,#0a101b);
+    border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:0 24px 60px rgba(0,0,0,.5);overflow:hidden;
+  }
+  .term-bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--border);background:#0b111d}
+  .term-bar i{width:11px;height:11px;border-radius:50%;display:block}
+  .term-bar i:nth-child(1){background:#ff5f57}
+  .term-bar i:nth-child(2){background:#febc2e}
+  .term-bar i:nth-child(3){background:#28c840}
+  .term-bar .t{margin-left:8px;font-size:.75rem;color:#5b6c88;align-self:center}
+  .term-body{padding:20px 18px 24px;font-size:.9rem;min-height:190px}
+  .term-body .line{white-space:nowrap;overflow:hidden}
+  .prompt{color:var(--accent)}
+  .cmd{color:#e6edf7}
+  .out{color:#7dd3fc;margin-top:8px}
+  .ok{color:var(--accent);margin-top:6px}
+  .caret{display:inline-block;width:8px;height:1.05em;background:var(--accent);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  @keyframes typing{from{width:0}to{width:100%}}
+  .type{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;animation:typing 1.3s steps(24) .3s both}
+  .fade{opacity:0;animation:fadeUp .5s ease forwards}
+  .d1{animation-delay:1.7s}
+  .d2{animation-delay:2.2s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  /* ===== sections ===== */
+  section{padding:66px 0}
+  .sec-head{text-align:center;margin-bottom:42px}
+  .sec-head h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;font-size:.98rem}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:24px 22px;transition:.25s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(52,211,153,.5);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+  .card .ico{
+    width:44px;height:44px;border-radius:12px;font-size:1.3rem;
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+    background:linear-gradient(135deg,rgba(52,211,153,.16),rgba(56,189,248,.16));
+    border:1px solid rgba(56,189,248,.25);
+  }
+  .card h3{font-size:1.04rem;margin-bottom:7px}
+  .card p{font-size:.9rem;color:var(--muted)}
+
+  /* screenshots */
+  .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .shots figure{
+    border-radius:18px;overflow:hidden;border:1px solid var(--border);
+    background:var(--panel);transition:.25s;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+  }
+  .shots figure:hover{transform:translateY(-6px) scale(1.015);border-color:rgba(56,189,248,.55)}
+  .shots img{width:100%;display:block}
+  body .shot.en{display:none}
+  body.lang-en .shot.zh{display:none}
+  body.lang-en .shot.en{display:block}
+
+  /* whats new */
+  .news{
+    background:linear-gradient(180deg,var(--panel),#101828);
+    border:1px solid var(--border);border-radius:22px;padding:34px 34px 30px;
+    display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center;
+  }
+  .news .badge{
+    text-align:center;border-right:1px dashed var(--border);padding-right:24px;
+  }
+  .news .badge .v{font-size:2.4rem;font-weight:800;color:var(--accent);line-height:1.1}
+  .news .badge .ios{font-size:.85rem;color:var(--muted);margin-top:6px}
+  .news ul{list-style:none;display:grid;gap:12px}
+  .news li{display:flex;gap:11px;font-size:.95rem;align-items:flex-start}
+  .news li::before{content:"✦";color:var(--accent-2);flex:none;margin-top:2px}
+
+  /* subscription */
+  details.sub-box{
+    background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 22px;font-size:.88rem;color:var(--muted);
+  }
+  details.sub-box summary{cursor:pointer;color:var(--text);font-weight:600;font-size:.95rem;list-style:none}
+  details.sub-box summary::before{content:"▸ ";color:var(--accent)}
+  details.sub-box[open] summary::before{content:"▾ "}
+  details.sub-box ul{margin:14px 0 4px 2px;display:grid;gap:8px}
+  details.sub-box li{padding-left:16px;position:relative}
+  details.sub-box li::before{content:"·";position:absolute;left:4px;color:var(--accent)}
+
+  /* footer */
+  footer{border-top:1px solid var(--border);background:#070a10;padding:40px 0 46px;margin-top:20px}
+  .foot{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;align-items:flex-start}
+  .foot .flinks{display:flex;gap:22px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+  .foot .flinks a:hover{color:var(--accent)}
+  .copy{font-size:.82rem;color:#5b6c88;margin-top:20px}
+
+  @media(max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;gap:36px}
+    .grid-3{grid-template-columns:1fr 1fr}
+    .shots{grid-template-columns:1fr 1fr}
+    .news{grid-template-columns:1fr;text-align:center}
+    .news .badge{border-right:none;border-bottom:1px dashed var(--border);padding:0 0 18px}
+    .news li{text-align:left}
+    .nav nav{display:none}
+  }
+  @media(max-width:560px){
+    .grid-3{grid-template-columns:1fr}
+    .hero{padding-top:56px}
+    section{padding:48px 0}
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="bolt">⚡</span>CodeRun</div>
+    <nav>
+      <a href="#features" data-zh="核心功能" data-en="Features">核心功能</a>
+      <a href="#screenshots" data-zh="应用截图" data-en="Screenshots">应用截图</a>
+      <a href="#who" data-zh="适合谁用" data-en="Who It's For">适合谁用</a>
+      <a href="#news" data-zh="最新版本" data-en="What's New">最新版本</a>
+    </nav>
+    <div class="tools">
+      <button class="lang-btn" id="langBtn">EN</button>
+      <a class="btn-sm" href="https://apps.apple.com/app/id1541527450" target="_blank" rel="noopener" data-zh="下载" data-en="Download">下载</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== hero ===== -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="pill"><span class="dot"></span><span data-zh="全新兼容 iOS 27" data-en="Fully compatible with iOS 27">全新兼容 iOS 27</span></span>
+      <h1>
+        <span class="brand">CodeRun</span>
+        <span class="full" data-zh="代码片段运行工具" data-en="Code Snippet Run">代码片段运行工具</span>
+      </h1>
+      <p class="sub" data-zh="各种代码片段运行与编辑工具 · 内置 600+ 种编程语言" data-en="Run &amp; edit in 600+ languages — right on your phone">各种代码片段运行与编辑工具 · 内置 600+ 种编程语言</p>
+      <p class="promo" data-zh="内置浏览器，边查资料边学编程、随查随用，聊天与代码可一键保存；整体体验更流畅，打开就能写、就能跑。" data-en="A built-in browser lets you look things up and learn to code online — plus a smoother, faster experience overall.">内置浏览器，边查资料边学编程、随查随用，聊天与代码可一键保存；整体体验更流畅，打开就能写、就能跑。</p>
+
+      <div class="tags">
+        <span>Python</span><span>Java</span><span>Swift</span><span>C#</span><span>JavaScript</span>
+        <span>C++</span><span>Rust</span><span>Go</span><span>Kotlin</span><span>Ruby</span><span>PHP</span>
+        <span class="more" data-zh="600+ 语言" data-en="600+ languages">600+ 语言</span>
+      </div>
+
+      <div class="cta">
+        <a class="appstore" href="https://apps.apple.com/app/id1541527450" target="_blank" rel="noopener">
+          <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span>
+            <small data-zh="下载于" data-en="Download on the">下载于</small>
+            <strong>App Store</strong>
+          </span>
+        </a>
+        <div class="free-note">
+          <span data-zh="免费下载 · 含内购订阅" data-en="Free download · In-App Purchases">免费下载 · 含内购订阅</span><br>
+          <span class="mono" style="font-size:.75rem;color:#5b6c88">apps.apple.com/app/id1541527450</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal" aria-hidden="true">
+      <div class="term-bar"><i></i><i></i><i></i><span class="t">CodeRun</span></div>
+      <div class="term-body">
+        <div class="line"><span class="prompt">~ $ </span><span class="cmd type">coderun hello.py</span></div>
+        <div class="line out fade d1">Hello, World!</div>
+        <div class="line ok fade d2">✓ <span data-zh="运行成功 · 0.02s · Python 3.12" data-en="Finished in 0.02s · Python 3.12">运行成功 · 0.02s · Python 3.12</span></div>
+        <div class="line" style="margin-top:14px"><span class="prompt">~ $ </span><span class="caret"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== features ===== -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-zh="核心功能" data-en="Key Features">核心功能</h2>
+      <p data-zh="无需在电脑上配置开发环境，打开就能写、就能跑" data-en="No development environment to set up — just open it and start writing and running code">无需在电脑上配置开发环境，打开就能写、就能跑</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="ico">🌍</div>
+        <h3 data-zh="海量语言" data-en="Vast language support">海量语言</h3>
+        <p data-zh="600 多种语言，从 Python、Java、Swift、C#、JavaScript、C++ 等主流语言，到 Brainfuck、INTERCAL、Malbolge 等冷门语言一网打尽。" data-en="Over 600 languages, from mainstream ones like Python, Java, Swift, C#, JavaScript and C++ to esoteric favorites like Brainfuck, INTERCAL and Malbolge.">600 多种语言，从主流到冷门一网打尽。</p>
+      </div>
+      <div class="card">
+        <div class="ico">⚡</div>
+        <h3 data-zh="即写即跑" data-en="Write and run instantly">即写即跑</h3>
+        <p data-zh="输入代码一键运行，执行结果逐条实时返回，支持传入输入参数。" data-en="Run code with one tap and get the output returned line by line in real time, with support for input arguments.">输入代码一键运行，结果逐条实时返回。</p>
+      </div>
+      <div class="card">
+        <div class="ico">📝</div>
+        <h3 data-zh="专业编辑器" data-en="Professional editor">专业编辑器</h3>
+        <p data-zh="基于 Monaco 内核，支持语法高亮、代码提示与格式化。" data-en="Monaco-powered, with syntax highlighting, code hints, and formatting.">基于 Monaco 内核，高亮、提示、格式化齐全。</p>
+      </div>
+      <div class="card">
+        <div class="ico">💡</div>
+        <h3 data-zh="内置示例" data-en="Built-in examples">内置示例</h3>
+        <p data-zh="每种语言都带有 Hello World 示例，点开即可体验。" data-en="Every language ships with a Hello World example you can try right away.">每种语言都带 Hello World 示例，点开即用。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌐</div>
+        <h3 data-zh="内置浏览器" data-en="Built-in browser">内置浏览器</h3>
+        <p data-zh="打开 AI 网站等任意网页，边问边学、随查随用；聊天或代码内容一键保存到文件管理器。" data-en="Open any webpage, including AI sites, right inside the app; save chat or code content to the file manager with one tap.">打开 AI 网站等任意网页，聊天与代码一键保存。</p>
+      </div>
+      <div class="card">
+        <div class="ico">📁</div>
+        <h3 data-zh="文件管理器" data-en="File manager">文件管理器</h3>
+        <p data-zh="管理你的代码文件，通过 WiFi 在手机与电脑之间互传，支持重命名、删除与分享。" data-en="Manage your code files, transfer them between your phone and computer over WiFi, with rename, delete, and share.">WiFi 互传代码文件，支持重命名、删除与分享。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== screenshots ===== -->
+<section id="screenshots" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-zh="应用截图" data-en="Screenshots">应用截图</h2>
+      <p data-zh="编辑、运行、浏览器、文件管理，一屏看全" data-en="Editor, runner, browser and file manager — all in one place">编辑、运行、浏览器、文件管理，一屏看全</p>
+    </div>
+    <div class="shots">
+      <figure><img class="shot zh" src="assets/screenshots/01_zh.png" alt="CodeRun 编辑器截图" data-zh="CodeRun 编辑器截图" data-en="CodeRun editor screenshot"><img class="shot en" src="assets/screenshots/01_en.png" alt="CodeRun editor screenshot" data-zh="CodeRun 编辑器截图" data-en="CodeRun editor screenshot"></figure>
+      <figure><img class="shot zh" src="assets/screenshots/02_zh.png" alt="CodeRun 运行结果截图" data-zh="CodeRun 运行结果截图" data-en="CodeRun output screenshot"><img class="shot en" src="assets/screenshots/02_en.png" alt="CodeRun output screenshot" data-zh="CodeRun 运行结果截图" data-en="CodeRun output screenshot"></figure>
+      <figure><img class="shot zh" src="assets/screenshots/03_zh.png" alt="CodeRun 内置浏览器截图" data-zh="CodeRun 内置浏览器截图" data-en="CodeRun browser screenshot"><img class="shot en" src="assets/screenshots/03_en.png" alt="CodeRun browser screenshot" data-zh="CodeRun 内置浏览器截图" data-en="CodeRun browser screenshot"></figure>
+      <figure><img class="shot zh" src="assets/screenshots/04_zh.png" alt="CodeRun 文件管理截图" data-zh="CodeRun 文件管理截图" data-en="CodeRun files screenshot"><img class="shot en" src="assets/screenshots/04_en.png" alt="CodeRun files screenshot" data-zh="CodeRun 文件管理截图" data-en="CodeRun files screenshot"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== who ===== -->
+<section id="who">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-zh="适合谁用" data-en="Who It's For">适合谁用</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="ico">🎓</div>
+        <h3 data-zh="学生" data-en="Students">学生</h3>
+        <p data-zh="用手机就能上手新语言，无需先配置一堆开发环境。" data-en="Pick up a new language right on your phone, with no heavy environment setup.">用手机就能上手新语言，无需先配置开发环境。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧑‍💻</div>
+        <h3 data-zh="开发者" data-en="Developers">开发者</h3>
+        <p data-zh="随时验证算法或思路，快速试错、快速迭代。" data-en="Quickly test an algorithm or idea and iterate on the go.">随时验证算法或思路，快速试错。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🤖</div>
+        <h3 data-zh="极客与代码玩家" data-en="Geeks and code players">极客与代码玩家</h3>
+        <p data-zh="在 Brainfuck、Malbolge 等古怪语言里挑战自己。" data-en="Challenge yourself with oddball languages like Brainfuck and Malbolge.">在 Brainfuck、Malbolge 等古怪语言里挑战自己。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== what's new ===== -->
+<section id="news" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-zh="最新版本" data-en="What's New">最新版本</h2>
+    </div>
+    <div class="news">
+      <div class="badge">
+        <div class="v">iOS 27</div>
+        <div class="ios" data-zh="已全面兼容" data-en="Fully compatible">已全面兼容</div>
+      </div>
+      <ul>
+        <li data-zh="兼容最新 iOS 27" data-en="Compatible with the latest iOS 27">兼容最新 iOS 27</li>
+        <li data-zh="新增内置浏览器，可在 App 内直接查阅资料、在线学习编程" data-en="New built-in browser to look up docs and learn programming online">新增内置浏览器，可在 App 内直接查阅资料、在线学习编程</li>
+        <li data-zh="优化整体使用体验，运行更流畅" data-en="Improved overall experience and performance">优化整体使用体验，运行更流畅</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:26px">
+      <details class="sub-box">
+        <summary data-zh="会员订阅说明" data-en="Unlimited Access Subscription">会员订阅说明</summary>
+        <ul>
+          <li data-zh="订阅后可无限制使用应用内所有功能，按周、月或年收费，费用视所选计划而定。" data-en="Enjoy unlimited access to all features within the app. Subscriptions are charged weekly, monthly, or yearly, depending on the selected plan.">订阅后可无限制使用应用内所有功能，按周、月或年收费。</li>
+          <li data-zh="确认购买时会从 iTunes 账户扣款；可在当前订阅结束 24 小时前关闭自动续订，否则将自动续订。" data-en="Payment will be charged to your iTunes account upon confirmation. Turn off auto-renewal at least 24 hours before the period ends; otherwise it renews automatically.">确认购买时从 iTunes 账户扣款；结束前 24 小时可关闭自动续订。</li>
+          <li data-zh="用户可前往账户设置管理订阅并关闭自动续订；免费试用期内未使用的时长将在购买后作废。" data-en="Manage or cancel anytime in Account Settings. Any unused portion of a free trial is forfeited upon purchase.">可在账户设置管理订阅；试用期未使用时长将在购买后作废。</li>
+        </ul>
+      </details>
+    </div>
+
+    <div style="text-align:center;margin-top:36px">
+      <a class="appstore" href="https://apps.apple.com/app/id1541527450" target="_blank" rel="noopener">
+        <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span>
+          <small data-zh="下载于" data-en="Download on the">下载于</small>
+          <strong>App Store</strong>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="logo"><span class="bolt">⚡</span>CodeRun</div>
+        <div class="copy" data-zh="手机上的代码片段运行与编辑工具" data-en="Run &amp; edit code snippets on your phone">手机上的代码片段运行与编辑工具</div>
+      </div>
+      <div class="flinks">
+        <a id="lnkPrivacy" href="https://www.dazhuogroup.com/coderun/privacy_statement_cn.php" target="_blank" rel="noopener" data-zh="隐私权政策" data-en="Privacy Policy">隐私权政策</a>
+        <a href="https://www.dazhuogroup.com/coderun/terms_of_use_en.php" target="_blank" rel="noopener" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+        <a href="https://www.dazhuogroup.com/coderun/" target="_blank" rel="noopener" data-zh="支持与反馈" data-en="Support">支持与反馈</a>
+        <a href="https://apps.apple.com/app/id1541527450" target="_blank" rel="noopener">App Store</a>
+      </div>
+    </div>
+    <div class="copy">© 2024 dazhuogroup Inc · Shanghai Dazhuo Information Technology Co., Ltd.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var TITLE = {
+    zh: "CodeRun - 代码片段运行工具 | 在手机上运行 600+ 种编程语言",
+    en: "CodeRun - Code Snippet Run | Run & edit in 600+ languages"
+  };
+  var PRIVACY = {
+    zh: "https://www.dazhuogroup.com/coderun/privacy_statement_cn.php",
+    en: "https://www.dazhuogroup.com/coderun/privacy_statement_en.php"
+  };
+  function apply(lang){
+    var body = document.body;
+    body.classList.toggle("lang-en", lang === "en");
+    body.classList.toggle("lang-zh", lang !== "en");
+    document.documentElement.lang = (lang === "en") ? "en" : "zh-CN";
+    document.querySelectorAll("[data-zh][data-en]").forEach(function(el){
+      var t = el.getAttribute("data-" + lang);
+      if (el.tagName === "IMG") { el.setAttribute("alt", t); }
+      else { el.textContent = t; }
+    });
+    document.getElementById("lnkPrivacy").href = PRIVACY[lang];
+    document.title = TITLE[lang];
+    document.getElementById("langBtn").textContent = (lang === "en") ? "中" : "EN";
+    try { localStorage.setItem("coderun-lang", lang); } catch(e){}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("coderun-lang"); } catch(e){}
+  apply(saved === "en" ? "en" : "zh");
+  document.getElementById("langBtn").addEventListener("click", function(){
+    apply(document.body.classList.contains("lang-en") ? "zh" : "en");
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+- Compatible with the latest iOS 27
+- New built-in browser to look up docs and learn programming online
+- Improved overall experience and performance
