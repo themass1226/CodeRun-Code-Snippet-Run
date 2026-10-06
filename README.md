@@ -21,8 +21,6 @@
 | [App Store 下载](https://apps.apple.com/app/id1541527450) | [Download on the App Store](https://apps.apple.com/app/id1541527450) |
 
 - **Apple ID：** `1541527450` → <https://apps.apple.com/app/id1541527450>
-- **Bundle ID：** `com.dazhuogroup.CodeRunner`
-- **开发者 / Developer：** Shanghai Dazhuo Information Technology Co., Ltd.（上海大卓信息科技有限公司）
 
 ## 🌐 在线宣传页 / Live Landing Page
 
@@ -54,13 +52,6 @@ CodeRun 是一款在手机上运行和编辑代码片段的工具。它内置 60
 - **文件管理器：** 内置文件管理，可通过 WiFi 在手机与电脑之间互传代码文件，支持重命名、删除与分享。
 
 适合谁用：学生（用手机就能上手新语言）、开发者（随时验证算法或思路）、极客与代码玩家（在 Brainfuck、Malbolge 等古怪语言里挑战自己）。
-
-**🔍 中文搜索关键词：**
-
-```
-CodeRun, 代码编辑器, 语言, 在线编译器, 编程, C++, swift, code, php, python, editor, java, ide, node,
-开发编码测试浏览器程序编程学习开发程序员代码运行片段
-```
 
 ---
 
