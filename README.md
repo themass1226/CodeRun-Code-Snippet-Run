@@ -32,6 +32,32 @@ The landing page is fully bilingual (中文 / English) with an App Store downloa
 
 ---
 
+## 📱 应用截图 / Screenshots
+
+**🇨🇳 中文简体**
+
+<table>
+  <tr>
+    <td width="25%"><img src="assets/screenshots/01_zh.png" alt="CodeRun 中文截图 1" width="100%"></td>
+    <td width="25%"><img src="assets/screenshots/02_zh.png" alt="CodeRun 中文截图 2" width="100%"></td>
+    <td width="25%"><img src="assets/screenshots/03_zh.png" alt="CodeRun 中文截图 3" width="100%"></td>
+    <td width="25%"><img src="assets/screenshots/04_zh.png" alt="CodeRun 中文截图 4" width="100%"></td>
+  </tr>
+</table>
+
+**🇬🇧 English**
+
+<table>
+  <tr>
+    <td width="25%"><img src="assets/screenshots/01_en.png" alt="CodeRun English screenshot 1" width="100%"></td>
+    <td width="25%"><img src="assets/screenshots/02_en.png" alt="CodeRun English screenshot 2" width="100%"></td>
+    <td width="25%"><img src="assets/screenshots/03_en.png" alt="CodeRun English screenshot 3" width="100%"></td>
+    <td width="25%"><img src="assets/screenshots/04_en.png" alt="CodeRun English screenshot 4" width="100%"></td>
+  </tr>
+</table>
+
+---
+
 ## 🇨🇳 中文介绍
 
 **名称：** CodeRun - 代码片段运行工具
@@ -103,7 +129,10 @@ This repository contains **only keywords and the introduction/landing page — n
 
 - 📲 App Store: <https://apps.apple.com/app/id1541527450>
 - 🌐 Landing page: <https://themass1226.github.io/CodeRun-Code-Snippet-Run/>
+- 🔒 Privacy Policy 隐私权政策: <https://www.dazhuogroup.com/coderun/privacy_statement_cn.php>
+- 📄 Terms of Use 使用条款: <https://www.dazhuogroup.com/coderun/terms_of_use_en.php>
 - 🏠 Official Website 官网: <https://www.dazhuogroup.com/coderun/>
 
 ---
 
+© 2024 dazhuogroup Inc · Generated with Codebuff 🤖
