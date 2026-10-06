@@ -103,10 +103,7 @@ This repository contains **only keywords and the introduction/landing page — n
 
 - 📲 App Store: <https://apps.apple.com/app/id1541527450>
 - 🌐 Landing page: <https://themass1226.github.io/CodeRun-Code-Snippet-Run/>
-- 🔒 Privacy Policy 隐私权政策: <https://www.dazhuogroup.com/coderun/privacy_statement_cn.php>
-- 📄 Terms of Use 使用条款: <https://www.dazhuogroup.com/coderun/terms_of_use_en.php>
 - 🏠 Official Website 官网: <https://www.dazhuogroup.com/coderun/>
 
 ---
 
-© 2024 dazhuogroup Inc · Generated with Codebuff 🤖
